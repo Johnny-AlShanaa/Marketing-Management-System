@@ -1,0 +1,89 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="profile container">
+    <div class="pr-line">
+        <span class="first-p"> Your Email </span> :
+        <span class="sec-p"> {{ user.email }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your User Name </span> :
+        <span class="sec-p"> {{ user.user_name }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your First Name </span> :
+        <span class="sec-p"> {{ user.first_name }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your Gender </span> :
+        <span class="sec-p"> {{ user.gender }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your Percentage </span> :
+        <span class="sec-p"> {{ user.percentage }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your Receive Money </span> :
+        <span class="sec-p"> {{ user.receive_money }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your Minimum Receive Money </span> :
+        <span class="sec-p"> {{ user.Minimum_receive_money }} </span>
+    </div>
+    <div class="pr-line">
+        <span class="first-p"> Your Reference Code </span> :
+        <span class="sec-p"> {{ user.reference_code }} </span>
+    </div>
+
+    {% if user.receive_money > user.Minimum_receive_money %}
+    <form action="receive_money" method="POST">
+        {% csrf_token %}
+        <button type="submit">Receive Money</button>
+    </form>
+    {% endif %}
+
+    {% if promotions %}
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Reference Code</th>
+            <th>Cource Name</th>
+            <th>Cource Prise</th>
+            <th>Persentage</th>
+            <th>Count</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+        {% for promotion in promotions %}
+        <tr>
+            <td>{{user.first_name}}</td>
+            <td>{{user.reference_code}}</td>
+            <td>{{promotion.cource_name}}</td>
+            <td>{{promotion.cource_prise}}</td>
+            <td>{{user.percentage}}%</td>
+            <td>{{promotion.count}}</td>
+            <td>{{promotion.total}}</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{total.count}}</td>
+            <td>{{total.total}}</td>
+        </tr>
+
+    </table>
+    {% endif %}
+
+</div>
+{% endblock %}

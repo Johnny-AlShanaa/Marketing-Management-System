@@ -1,0 +1,244 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    th,
+    td {
+      padding: 5px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #230C0F;
+      margin-bottom: 50px;
+    }
+
+    nav li {
+      float: left;
+    }
+
+    nav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav li a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    nav .active {
+      background-color: #CC2936;
+    }
+
+    body {
+      background: #ffffff;
+      background: linear-gradient(to bottom, #ffffff 0%, #e1e8ed 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e1e8ed', GradientType=0);
+      height: 100%;
+      margin: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+    }
+
+    .wrapper-1 {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper-2 {
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Kaushan Script', cursive;
+      font-size: 4em;
+      letter-spacing: 3px;
+      color: #5892FF;
+      margin: 0;
+      margin-bottom: 20px;
+    }
+
+    .wrapper-2 p {
+      margin: 0;
+      font-size: 1.3em;
+      font-family: 'Source Sans Pro', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .go-home {
+      background: #5892FF;
+      border: none;
+      padding: 10px 50px;
+      margin: 30px 0;
+      border-radius: 30px;
+      box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
+    }
+
+    .go-home a {
+      color: #fff;
+      text-transform: capitalize;
+      text-decoration: none;
+    }
+
+    .footer-like {
+      margin-top: auto;
+      background: #D7E6FE;
+      padding: 6px;
+      text-align: center;
+    }
+
+    .footer-like p {
+      margin: 0;
+      padding: 4px;
+      color: #5892FF;
+      font-family: 'Source Sans Pro', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .footer-like p a {
+      text-decoration: none;
+      color: #5892FF;
+      font-weight: 600;
+    }
+
+    @media (min-width:360px) {
+      h1 {
+        font-size: 4.5em;
+      }
+
+      .go-home {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (min-width:600px) {
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .wrapper-1 {
+        height: initial;
+        max-width: 620px;
+        margin: 0 auto;
+        margin-top: 50px;
+        box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
+      }
+
+      .pr-line {
+        margin-bottom: 10px;
+      }
+
+      span.first-p {
+        font-weight: bold;
+      }
+    }
+
+    .profile {
+      margin: 20px;
+      font-size: 20px;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(45deg, #49a09d, #5f2c82);
+      font-family: sans-serif;
+      font-weight: 100;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #f8f8f8;
+    }
+
+    table {
+      width: 800px;
+      border-collapse: collapse;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    th {
+      text-align: left;
+    }
+
+    thead th {
+      background-color: #55608f;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    tbody td {
+      position: relative;
+    }
+
+    tbody td:hover::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -9999px;
+      bottom: -9999px;
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+        {% if user.is_authenticated %}
+        <li style="float:right"><a href="{% url 'logout' %}">Log Out</a></li>
+        <li style="float:right"><a href="{% url 'profile' %}">Profile</a></li>
+        {% else %}
+        <li style="float:right"><a href="{% url 'login' %}">Log In</a></li>
+        <li style="float:right"><a href="{% url 'signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+
+</html>

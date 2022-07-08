@@ -1,0 +1,36 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if courses %}
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        {% if user.is_authenticated %}
+        <th>Url</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+    {% for course in courses %}
+    <tr>
+      <td>{{course.name}}</td>
+      <td>{{course.description}}</td>
+      <td>{{course.price}}</td>
+      {% if user.is_authenticated %}
+      <td> {{ request.build_absolute_uri }}{{course.reference_code}}/{{user.reference_code}} </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}
