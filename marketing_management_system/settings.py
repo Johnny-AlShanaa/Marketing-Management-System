@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-vc02lwv(b#3uxtfusn2hsk-9!2&t@7@gf+on^7-fohv&r^olb^
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','']
+ALLOWED_HOSTS = ['127.0.0.1','marketingmanagementsystem.herokuapp.com/']
 
 
 # Application definition
