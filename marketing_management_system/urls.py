@@ -14,13 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic.base import TemplateView
 from course import views as courseView
 from users import views as userView
 
 from django.views.static import serve
-from django.conf.urls import url 
+# from django.conf.urls import url 
 
 urlpatterns = [
     path("", courseView.home, name="home", ),
@@ -30,6 +30,6 @@ urlpatterns = [
     path("users/", include("users.urls")),
     path("users/", include("django.contrib.auth.urls")),
 
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
