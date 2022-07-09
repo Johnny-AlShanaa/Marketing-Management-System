@@ -11,18 +11,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import os
+from pickle import TRUE
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
-
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -31,13 +24,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 SECRET_KEY = 'django-insecure-vc02lwv(b#3uxtfusn2hsk-9!2&t@7@gf+on^7-fohv&r^olb^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 
-# ALLOWED_HOSTS = []
-
-DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1','marketingmanagementsystem.herokuapp.com/']
+DEBUG = True
 
 
 # Application definition
@@ -69,8 +57,7 @@ ROOT_URLCONF = 'marketing_management_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [BASE_DIR / 'templates'],
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
