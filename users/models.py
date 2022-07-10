@@ -45,7 +45,7 @@ class Marketer(AbstractBaseUser, PermissionsMixin):
     )
     gender = models.CharField(max_length=7, choices=GENDER_CHOICES)
     percentage = models.IntegerField()
-    receive_money = models.IntegerField(null=True)
+    receive_money = models.IntegerField(default=0)
     Minimum_receive_money = models.IntegerField()
     reference_code =  models.CharField(max_length=100, unique=True)
     start_date = models.DateTimeField(default=timezone.now)
