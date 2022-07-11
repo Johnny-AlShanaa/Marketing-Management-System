@@ -39,21 +39,22 @@ def Profile(request):
         'total': 0
         } 
     for i in promotion:
-        c = Course.objects.get(reference_code = i.ref_course)
+        c = Course.objects.filter(reference_code = i.ref_course)
         temp = {
         'cource_name': '',
         'cource_prise': '',
         'count': 1,
         'total': 0
         }
-        if not(serch_in_list_dict(promotions, c.name, (current_user.percentage * c.price)/100)):
-            temp['cource_name'] = c.name
-            temp['cource_prise'] = c.price
-            temp['total'] = (current_user.percentage * c.price)/100
-            promotions.append(copy.deepcopy(temp))
-        
-        total['count'] += 1
-        total['total'] += (current_user.percentage * c.price)/100
+        if c:
+            if not(serch_in_list_dict(promotions, c.name, (current_user.percentage * c.price)/100)):
+                temp['cource_name'] = c.name
+                temp['cource_prise'] = c.price
+                temp['total'] = (current_user.percentage * c.price)/100
+                promotions.append(copy.deepcopy(temp))
+            
+            total['count'] += 1
+            total['total'] += (current_user.percentage * c.price)/100
     
     context = {'promotions' : promotions, 'total' : total}
     return render(request, 'registration/profile.html', context)
